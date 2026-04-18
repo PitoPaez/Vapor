@@ -1,9 +1,13 @@
 package com.vapor.plataforma.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -21,19 +25,22 @@ public class Usuarios {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int Id;
+    private int Id;
 
     @NotBlank
-    public String Nombre;
+    private String Nombre;
 
     @NotBlank
-    public String Correo;
+    private String Correo;
 
     @NotBlank
-    public String ApodoUsuario;
+    private String ApodoUsuario;
 
     @NotNull
-    public int Edad;
+    private int Edad;
 
+    @ManyToMany
+    @JoinTable(name = "Biblioteca")
+    private List<Juegos> ListaBiblioteca;     
 
 }
