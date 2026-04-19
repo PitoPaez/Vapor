@@ -1,5 +1,7 @@
 package com.vapor.plataforma.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,16 +24,16 @@ public class Juegos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int Id;
 
-    @NotBlank
+    @NotBlank(message="El juego no puede no tener nombre")
     public String NombreJuego;
 
-    @NotNull
-    public String FechaLanzamiento;
+    @NotNull(message="La fecha del juego no puede estar vacia")
+    public LocalDate FechaLanzamiento;
 
-    @NotNull
+    @NotNull(message="El juego debe tener clasificacion")
     public int Calificacion;
 
-    @NotBlank
+    @NotBlank(message="El juego debe tener descripcion")
     public String Descripcion;
 
 }
