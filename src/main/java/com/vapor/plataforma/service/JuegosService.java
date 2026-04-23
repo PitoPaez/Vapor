@@ -29,7 +29,9 @@ public class JuegosService {
         if (juego.getFechaLanzamiento().isAfter(LocalDate.now())) {
             throw new RuntimeException("La fecha de lanzamiento no puede estar en un tiempo futuro.");
         }
-        juego.Id = 0;
+        if (juego.Id != 0){
+            throw new RuntimeException("La id al registrar un nuevo juego tiene que ser 0");
+        }
         return juegosRepository.save(juego);
     }
         

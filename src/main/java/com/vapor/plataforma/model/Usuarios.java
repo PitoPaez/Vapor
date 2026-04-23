@@ -25,22 +25,22 @@ public class Usuarios {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    public int Id;
 
-    @NotBlank
-    private String Nombre;
+    @NotBlank(message="El usuario debe tener un nombre")
+    public String Nombre;
 
-    @NotBlank
-    private String Correo;
+    @NotBlank(message="El usuario tiene que tener correo")
+    public String Correo;
 
-    @NotBlank
-    private String ApodoUsuario;
+    @NotBlank(message="El usuario debe tener un apodo")
+    public String ApodoUsuario;
 
-    @NotNull
-    private int Edad;
+    @NotNull(message="Se debe ingresar la edad")
+    public int Edad;
 
     @ManyToMany
     @JoinTable(name = "Biblioteca")
-    private List<Juegos> ListaBiblioteca;     
+    public List<Juegos> ListaBiblioteca;     
 
 }
