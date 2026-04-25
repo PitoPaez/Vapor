@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,12 +37,16 @@ public class JuegosController {
             Juegos juego = juegosService.BuscarPorId(id);
             return ResponseEntity.ok(juego);
         } catch (RuntimeException e) {
-            return ResponseEntity.status(404).body(e.getMessage());
+            return ResponseEntity.status(500).body(e.getMessage());
         }
     }
 
     @PostMapping
-    public ResponseEntity<?> Agregar(@Valid @RequestBody Juegos juego){
+    public ResponseEntity<?> Agregar(@Valid @RequestBody Juegos juego, BindingResult result){
+        if (result.hasErrors()) {
+            String mensaje = result.getFieldError().getDefaultMessage();
+            return ResponseEntity.badRequest().body("Error de validación al asignar datos: " + mensaje);
+            }
         try {
             Juegos juegoAgregado = juegosService.AgregarJuego(juego);
             return ResponseEntity.status(402).body(juegoAgregado);
@@ -51,13 +56,17 @@ public class JuegosController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> Actualizar(@PathVariable int id, @Valid @RequestBody Juegos juego){
+    public ResponseEntity<?> Actualizar(@PathVariable int id, @Valid @RequestBody Juegos juego, BindingResult result){
+        if (result.hasErrors()) {
+            String mensaje = result.getFieldError().getDefaultMessage();
+            return ResponseEntity.badRequest().body("Error de validación al actualizar datos: " + mensaje);
+            }
         try {
             juego.Id = id;
             Juegos juegoActualizado = juegosService.ActualizarDatosJuego(juego);
             return ResponseEntity.ok(juegoActualizado);
         } catch (RuntimeException e) {
-            return ResponseEntity.status(404).body(e.getMessage());
+            return ResponseEntity.status(500).body(e.getMessage());
         }
     }
 
@@ -67,7 +76,7 @@ public class JuegosController {
             juegosService.EliminarJuego(id);
             return ResponseEntity.ok("El juego con ID " + id + " ah sido eliminado exitosamente!");
         } catch (RuntimeException e) {
-            return ResponseEntity.status(404).body(e.getMessage());
+            return ResponseEntity.status(500).body(e.getMessage());
         }
     }
     

@@ -37,4 +37,24 @@ public class UsuariosService {
         return usuariosRepository.save(usuario);
     }
 
+    public Usuarios ActualizarDatosUsuario(Usuarios usuario){
+        if (!usuariosRepository.existsById(usuario.Id)){
+            throw new RuntimeException("No se encontro al usuario con el ID :" + usuario.Id);
+        }
+        if (usuario.Id != 0){
+            throw new RuntimeException("La id al registrar un nuevo usuario tiene que ser 0");
+        }
+        if (usuario.Edad < 18){
+            throw new RuntimeException("El usuario no puede ser menor de edad");
+        }
+        return usuariosRepository.save(usuario);
+    }
+
+    public void BorrarUsuario(int id){    
+        if (!usuariosRepository.existsById(id)){
+            throw new RuntimeException ("No se encotro al usuario con ID: " + id);
+        }
+        usuariosRepository.deleteById(id);
+    }
+
 }
