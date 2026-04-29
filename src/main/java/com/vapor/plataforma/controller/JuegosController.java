@@ -25,7 +25,7 @@ public class JuegosController {
 
     @Autowired
     private JuegosService juegosService;
-
+    
     @GetMapping
     public List<Juegos> Listar(){
         return juegosService.MostrarJuegos();
@@ -48,10 +48,10 @@ public class JuegosController {
             return ResponseEntity.badRequest().body("Error de validación al asignar datos: " + mensaje);
             }
         try {
-            Juegos juegoAgregado = juegosService.AgregarJuego(juego);
-            return ResponseEntity.status(402).body(juegoAgregado);
+            juegosService.AgregarJuego(juego);
+            return ResponseEntity.ok().body("Juego agregado exitosamente!");
         } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.status(500).body(e.getMessage());
         }
     }
 

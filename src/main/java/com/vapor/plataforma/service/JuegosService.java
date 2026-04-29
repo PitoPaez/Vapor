@@ -13,7 +13,7 @@ import com.vapor.plataforma.repository.JuegosRepository;
 public class JuegosService {
 
     @Autowired
-    private JuegosRepository juegosRepository;
+    public JuegosRepository juegosRepository;
 
     public List<Juegos> MostrarJuegos(){
         return juegosRepository.findAll();
