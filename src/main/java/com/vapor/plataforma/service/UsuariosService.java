@@ -30,9 +30,6 @@ public class UsuariosService {
         if (usuario == null){
             throw new RuntimeException("Los Datos del usuario no pueden estar vacios");
         }
-        if  (!usuariosRepository.existsById(usuario.Id)){
-            throw new RuntimeException("Ya existe un usuario con este Id");
-        }
         if (usuario.Id != 0){
             throw new RuntimeException("La id al registrar un nuevo usuario tiene que ser 0");
         }
@@ -62,7 +59,6 @@ public class UsuariosService {
         usuariosRepository.deleteById(id);
         
     }
-
 
     public void AgregarABiblioteca(int usuarioId, int juegoId){
         
