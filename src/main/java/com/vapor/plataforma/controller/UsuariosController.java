@@ -32,15 +32,19 @@ public class UsuariosController {
 
     @GetMapping
     public List<Usuarios> MostrarUsuarios(){
+        System.out.println("Se hace la peticion al Service desde el Controller de listar los juegos");
         return usuariosService.MostrarUsuarios();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> MostrarUsuarioPorId(@PathVariable int id){
         try{
+            System.out.println("Se hace la peticion al Service desde el Controller de buscar juego con id: "+ id);
             Usuarios usuario = usuariosService.BuscarUsuario(id);
+            System.out.println("Paso validacion de encontrar usuario dentro del Service");
             return ResponseEntity.ok(usuario);
         }catch(RuntimeException e){
+            System.out.println("Error de validacion dentro del Service");
             return ResponseEntity.status(500).body(e.getMessage());
         }
     }
@@ -48,13 +52,17 @@ public class UsuariosController {
     @PostMapping
     public ResponseEntity<?> Agregar(@Valid @RequestBody Usuarios usuario, BindingResult result){
         if(result.hasErrors()){
+            System.out.println("El Controller encontro un error en los datos ingresados");
             String mensaje = result.getFieldError().getDefaultMessage();
             return ResponseEntity.badRequest().body("Error de validación al asignar datos: " + mensaje);
        }
        try {
+           System.out.println("Paso primera validacion del controller, pasando a validaciones del service");
            Usuarios NuevoUsuario = usuariosService.AgregarUsuario(usuario);
+           System.out.println("Paso las Validaciones de agregar usuario dentro del Service");
            return ResponseEntity.ok(NuevoUsuario);
        } catch (RuntimeException e) {
+            System.out.println("Error en validaciones del Service");
             return ResponseEntity.badRequest().body(e.getMessage());
        }
     }
@@ -62,14 +70,18 @@ public class UsuariosController {
     @PutMapping("/{id}")
     public ResponseEntity<?> Actualizar(@PathVariable int id, @Valid @RequestBody Usuarios usuario, BindingResult result){
         if(result.hasErrors()){
+            System.out.println("El Controller encontro un error en los datos ingresados");
             String mensaje = result.getFieldError().getDefaultMessage();
-            return ResponseEntity.badRequest().body("Error de validación al asignar datos: " + mensaje);
+            return ResponseEntity.badRequest().body("Error de validación al leer los datos: " + mensaje);
         }
         try {
+            System.out.println("Paso primera validacion del controller, pasando a validaciones del service");
             usuario.Id = id;
             Usuarios UsuarioActualizado = usuariosService.ActualizarDatosUsuario(usuario);
+            System.out.println("Paso las Validaciones de actualizar usuario dentro del Service");
             return ResponseEntity.ok(UsuarioActualizado);
         } catch (RuntimeException e) {
+            System.out.println("Error de validacion dentro del Service");
             return ResponseEntity.status(500).body(e.getMessage());
         }
     }
@@ -77,18 +89,24 @@ public class UsuariosController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> Eliminar(@PathVariable int id){
         try {
+            System.out.println("Se hace la peticion al Service desde el Controller de eliminar usuario");
             usuariosService.BorrarUsuario(id);
+            System.out.println("Paso las Validaciones de eliminar usuario dentro del Service");
             return ResponseEntity.ok("El usuario con ID " + id + " ah sido eliminado exitosamente!");
         } catch (RuntimeException e) {
+            System.out.println("Error de validacion dentro del Service");
             return ResponseEntity.status(500).body(e.getMessage());
         }
     }
     @PostMapping("/{usuarioId}/biblioteca/{juegoId}")
     public ResponseEntity<?> agregarJuego(@PathVariable int usuarioId, @PathVariable int juegoId) {
         try {
+            System.out.println("Se hace la peticion al Service desde el Controller de agregar juego a biblioteca de usuario");
             usuariosService.AgregarABiblioteca(usuarioId, juegoId);
+            System.out.println("Paso las Validaciones de agregar juego a biblioteca de usuario dentro del Service");
             return ResponseEntity.status(201).body("Juego añadido con éxito.");
         } catch (RuntimeException e) {
+            System.out.println("Error de validacion dentro del Service");
             return ResponseEntity.status(400).body(e.getMessage());
         }
     }
@@ -96,9 +114,12 @@ public class UsuariosController {
     @GetMapping("/{id}/biblioteca")
     public ResponseEntity<?> mostrarBiblioteca(@PathVariable int id) {
         try {
+            System.out.println("Se hace la peticion al Service desde el Controller de mostrar biblioteca de usuario");
             List<Juegos> biblioteca = usuariosService.MostrarBiblioteca(id);
+            System.out.println("Paso las Validaciones de mostrar biblioteca de usuario dentro del Service");
             return ResponseEntity.ok(biblioteca);       
         } catch (RuntimeException e) {
+            System.out.println("Error de validacion dentro del Service");
             return ResponseEntity.status(404).body(e.getMessage());
         }
     }
