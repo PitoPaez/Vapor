@@ -13,3 +13,4 @@ public class ApiError {
     private String mensaje;
     private String detalle;
 }
+
