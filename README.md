@@ -79,3 +79,6 @@ http://localhost:8080/Perfil_Steam/76561198975528727
 # Clonar el repositorio
 git clone https://github.com/PitoPaez/Vapor.git
 cd plataforma
+
+
+Codigo por Vicente Arellano "PitoPaez"
