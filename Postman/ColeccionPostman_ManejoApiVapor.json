@@ -1,0 +1,312 @@
+{
+  "info": {
+    "_postman_id": "b529ae03-a4bb-4948-a6b6-666f4dbcb70f",
+    "name": "ComprobacionVapor",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53316677",
+    "_collection_link": "https://go.postman.co/collection/53316677-b529ae03-a4bb-4948-a6b6-666f4dbcb70f?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Manejo Juegos",
+      "item": [
+        {
+          "name": "Mostrar lista de Juegos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/juegos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "juegos"
+              ]
+            },
+            "description": "Para busqueda de lista de juegos presionar \"Send\" con URL de la api.\n\nEjemplo:\n\n\"[http://localhost:8080/juegos\"](http://localhost:8080/juegos)"
+          },
+          "response": []
+        },
+        {
+          "name": "Mostrar juego por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/juegos/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "juegos",
+                "1"
+              ]
+            },
+            "description": "Para busqueda de juego por Id, alterar direccion de la peticion y añadir Id.\n\nEjemplo:\n\n\"[http://localhost:8080/juegos/1\"](http://localhost:8080/juegos/1)"
+          },
+          "response": []
+        },
+        {
+          "name": "Agregar Juego",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"Id\": 0,\n    \"NombreJuego\": \"\",\n    \"FechaLanzamiento\": \"YYYY-MM-DD\",\n    \"Calificacion\": 0,\n    \"Descripcion\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/juegos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "juegos"
+              ]
+            },
+            "description": "Para agregar nuevo juego, mandar Json con el objeto juego y su atributos.\n\nEjemplo:\n\n{\n\n\"Id\": 0,\n\n\"NombreJuego\": \"Juego1\",\n\n\"FechaLanzamiento\": \"2000-01-01\",\n\n\"Calificacion\": 1,\n\n\"Descripcion\": \"JuegoPrueba\"\n\n}"
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar Juego",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"Id\": 0,\n    \"NombreJuego\": \"\",\n    \"FechaLanzamiento\": \"YYYY-MM-DD\",\n    \"Calificacion\": 0,\n    \"Descripcion\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/juegos/122",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "juegos",
+                "122"
+              ]
+            },
+            "description": "Para actualizar juego existente, editar URL de peticion al Id de juego a actualizar y agregar cuerpo para enviar actualizacion (El Id no es modificable).\n\nEjemplo:\n\n\"[http://localhost:8080/juegos/1\"](http://localhost:8080/juegos/1) (el \"/1\"representa el juego seleccionado para actualizar)\n\nJuego encontrado con el Id \"/1\":  \n{\n\n\"Id\": 1,\n\n\"NombreJuego\": \"Juego1\",\n\n\"FechaLanzamiento\": \"2000-01-01\",\n\n\"Calificacion\": 1,\n\n\"Descripcion\": \"JuegoPrueba\"\n\n}"
+          },
+          "response": []
+        },
+        {
+          "name": "Borrar Juego",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"Id\": 0,\n    \"NombreJuego\": \"Goat Simulator\",\n    \"FechaLanzamiento\": \"2013-05-23\",\n    \"Calificacion\": 100,\n    \"Descripcion\": \"El mejor juego de la historia\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/juegos/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "juegos",
+                "1"
+              ]
+            },
+            "description": "Para eliminar juego, cambiar URL de peticion y agregar Id de juego a borrar.\n\nEjemplo:  \n\"[http://localhost:8080/juegos/1\"](http://localhost:8080/juegos/1) (Se eliminara el juego de Id \"/1\")"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Manejo Usuarios",
+      "item": [
+        {
+          "name": "Mostar lista de usuarios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/usuarios",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "usuarios"
+              ]
+            },
+            "description": "Para busqueda de lista de usuarios presionar \"Send\" con URL de la api.\n\nEjemplo:\n\n\"[http://localhost:8080/usuarios\"](http://localhost:8080/juegos)"
+          },
+          "response": []
+        },
+        {
+          "name": "Buscar usuario por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Para busqueda de usuario por Id, alterar direccion de la peticion y añadir Id.\n\nEjemplo:\n\n\"[http://localhost:8080/usuarios/1](http://localhost:8080/juegos/1)\""
+          },
+          "response": []
+        },
+        {
+          "name": "Añadir usuarios",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/usuarios",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "usuarios"
+              ]
+            },
+            "description": "Para agregar nuevo usuario, mandar Json con el objeto usuario y sus atributos.\n\nEjemplo:\n\n{\n\n\"Id\": 0,\n\n\"Nombre\": \"Nombre1\",\n\n\"Correo\": \"[Correo@gmail.com](https://mailto:Correo@gmail.com)\",\n\n\"Edad\": 18,\n\n}"
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar datos usuario",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/usuarios",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "usuarios"
+              ]
+            },
+            "description": "Para actualizar usuario existente, editar URL de peticion al Id de juego a actualizar y agregar cuerpo para enviar actualizacion (El Id no es modificable).\n\nEjemplo:\n\n\"[http://localhost:8080/usuario/1](http://localhost:8080/juegos/1)\"(el \"/1\"representa el usuario seleccionado para actualizar)\n\nUsuario encontrado con el Id \"/1\":\n\n{\n\n\"Id\": 1,\n\n\"Nombre\": \"Nombre1\",\n\n\"Correo\": \"[Correo@gmail.com](https://mailto:Correo@gmail.com)\",\n\n\"Edad\": 18,\n\n}"
+          },
+          "response": []
+        },
+        {
+          "name": "Borrar usuario",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8080/usuarios/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "usuarios",
+                "1"
+              ]
+            },
+            "description": "Para eliminar juego, cambiar URL de peticion y agregar Id de juego a borrar.\n\nEjemplo:  \n\"[http://localhost:8080/usuario/1](http://localhost:8080/juegos/1)\" (Se eliminara el juego de Id \"/1\")"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Manejo Blibliotecas",
+      "item": [
+        {
+          "name": "Revisar bibliotecas de usuario",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": "Para revisar biblioteca de usuario, alterar direccion de la peticion y añadir como path el Id de usuario seguido con \"/biblioteca\".\n\nEjemplo:\n\n\"[http://localhost:8080/usuarios/1/biblioteca](http://localhost:8080/usuarios/1/biblioteca)\""
+          },
+          "response": []
+        },
+        {
+          "name": "Agregar juego a bilbioteca",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/usuarios/1/biblioteca/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "usuarios",
+                "1",
+                "biblioteca",
+                "2"
+              ]
+            },
+            "description": "Para agregar juego a biblioteca de un usuario, alterar direccion de la peticion y añadir como path el Id de usuario seguido con \"/biblioteca\" y despues seguido del Id del juego.\n\nEjemplo:\n\n\"http://localhost:8080/usuarios/1/biblioteca/1\" (Al usuario \"/1\" se le añade a su biblioteca el juego de Id \"/1\")"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Manejo DTO Steam",
+      "item": [
+        {
+          "name": "Busqueda usuario SteamDTO",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/Perfil_Steam/76561198975528727",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "Perfil_Steam",
+                "76561198975528727"
+              ]
+            },
+            "description": "Para buscar los datos de un perfil de Steam, se añade el path /Perfil_Steam y el SteamId del usuario de Steam a buscar.\n\nEjemplo:\n\n\"http://localhost:8080/Perfil_Steam/76561198975528727\""
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

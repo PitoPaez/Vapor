@@ -1,8 +1,9 @@
 package com.vapor.plataforma.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.vapor.plataforma.ConfigSteamKey.SteamConfig;
 import com.vapor.plataforma.SteamDTO.SteamDTO;
@@ -10,31 +11,33 @@ import com.vapor.plataforma.SteamDTO.SteamDTO;
 @Service
 public class SteamDtoService {
 
+    @Autowired
+    @Qualifier("steamWebClient")
+    private WebClient steamWebClient;
+    
+    @Autowired
+    private SteamConfig steamConfig;
 
+    public SteamDTO.PlayerDTO BuscarUsuarioPorID(String steamId) {
 
-    private final RestTemplate restTemplate;    
-    private final SteamConfig steamConfig;
+        if (steamConfig.getApiKey() == null) {
+            throw new RuntimeException("La API Key de Steam no está configurada.");
+        }
 
-    public SteamDtoService(SteamConfig steamConfig) {
-        this.steamConfig = steamConfig;
-        this.restTemplate = new RestTemplate();
-    }
-
-    public SteamDTO.PlayerDTO obtenerResumenUsuario(String steamId) {
-    String url = UriComponentsBuilder.newInstance() // Crea la instancia primero
-        .scheme("https")
-        .host("api.steampowered.com")
-        .path("/ISteamUser/GetPlayerSummaries/v0002/")
-        .queryParam("key", steamConfig.getApiKey())
-        .queryParam("steamids", steamId)
-        .build()
-        .toUriString();
-        
-        SteamDTO usuario = restTemplate.getForObject(url, SteamDTO.class);
+        SteamDTO usuario = steamWebClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/ISteamUser/GetPlayerSummaries/v0002/")
+                        .queryParam("key", steamConfig.getApiKey())
+                        .queryParam("steamids", steamId)
+                        .build())
+                .retrieve()
+                .bodyToMono(SteamDTO.class)
+                .block(); 
 
         if (usuario == null || usuario.getResponse() == null || usuario.getResponse().getPlayers().isEmpty()) {
-            throw new RuntimeException("No se encontraron resultados en Steam para el ID: " + steamId);
+            throw new RuntimeException("No se encontraro un usuario con el ID: " + steamId);
         }
+
         return usuario.getResponse().getPlayers().get(0);
     }
 

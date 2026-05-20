@@ -22,7 +22,7 @@ public class SteamDtoController {
     @GetMapping("/{steamId}")
     public ResponseEntity<?> getPerfil(@PathVariable String steamId) {
         try {
-            SteamDTO.PlayerDTO perfil = steamDtoService.obtenerResumenUsuario(steamId);
+            SteamDTO.PlayerDTO perfil = steamDtoService.BuscarUsuarioPorID(steamId);
             return ResponseEntity.ok(perfil);
             
         } catch (RuntimeException e) {
