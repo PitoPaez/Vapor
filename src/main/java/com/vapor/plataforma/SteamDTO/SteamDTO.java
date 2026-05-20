@@ -31,6 +31,9 @@ public class SteamDTO {
         
         @JsonProperty("personaname")
         private String apodo;
+
+        @JsonProperty("realname")
+        private String nombrereal;
         
         private int personastate;
     }
